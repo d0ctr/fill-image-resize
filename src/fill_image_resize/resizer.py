@@ -16,9 +16,9 @@ def resize(path: str, resulting_width: int, resulting_height: int) -> Image.Imag
     :param path: A filename (string), pathlib.Path object or a file object.
         The file object must implement ``file.read``, ``file.seek``,
         and ``file.tell`` methods, and be opened in binary mode.
-    :param resulting_width: Must be >= 0. The resulting width of returned image.
+    :param resulting_width: Must be > 0. The resulting width of returned image.
         Should be an integer.
-    :param resulting_height: Must be >= 0. The resulting height of returned image. 
+    :param resulting_height: Must be > 0. The resulting height of returned image. 
         Should be an integer.
     :returns: An :py:class:`~PIL.Image.Image` object.
     :exception FileNotFoundError: If the file cannot be found. Or if the output
@@ -34,8 +34,8 @@ def resize(path: str, resulting_width: int, resulting_height: int) -> Image.Imag
         may have been created, and may contain partial data.
     """
     
-    if resulting_width < 0 or resulting_height < 0:
-        raise ValueError('resulting_width and resulting_height must be higher or equal to zero')
+    if resulting_width <= 0 or resulting_height <= 0:
+        raise ValueError('resulting_width and resulting_height must be higher than zero')
     
     img = Image.open(path)
 
