@@ -4,6 +4,7 @@ This package is dedicated to solve problem of resizing images from one size and 
 ## What happenes
 
 
+![fill_image_resize](https://user-images.githubusercontent.com/33842017/133638932-0c9f9053-4e32-4675-8c44-988b1efd8fab.png)
 
 ## How to use
 ```python
