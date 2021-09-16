@@ -6,29 +6,36 @@ from PIL import Image
 
 def resize(path: str, resulting_width: int, resulting_height: int) -> Image.Image:
     """
-    Opens and resized an image to the desired width and height
+    Opens and resizes an image to the desired width and height
 
-    This function uses Pillow to open file and resize it without distring it.
+    This function uses Pillow to open file and resize it without distorting it.
     An example of such behaviour can be found in Figma, while managing an
     image you can select "Fill" type of transforming, thus your image
     wouldn't be stretched when altering aspect ratio, but resized and cropped.
 
     :param path: A filename (string), pathlib.Path object or a file object.
-       The file object must implement ``file.read``,
-       ``file.seek``, and ``file.tell`` methods,
-       and be opened in binary mode.
-    :param resulting_width: The resulting width of returned image. Should be 
-        an integer.
-    :param resulting_height: The resulting height of returned image. Should be 
-        an integer.
+        The file object must implement ``file.read``, ``file.seek``,
+        and ``file.tell`` methods, and be opened in binary mode.
+    :param resulting_width: Must be >= 0. The resulting width of returned image.
+        Should be an integer.
+    :param resulting_height: Must be >= 0. The resulting height of returned image. 
+        Should be an integer.
     :returns: An :py:class:`~PIL.Image.Image` object.
-    :exception FileNotFoundError: If the file cannot be found.
+    :exception FileNotFoundError: If the file cannot be found. Or if the output
+        format could not be determined from the file name.  Use the format
+        option to solve this.
     :exception PIL.UnidentifiedImageError: If the image cannot be opened and
-       identified.
-    :exception ValueError: If the ``mode`` is not "r", or if a ``StringIO``
-       instance is used for ``fp``.
-    :exception TypeError: If ``formats`` is not ``None``, a list or a tuple.
+        identified.
+    :exception ValueError: If a ``StringIO`` instance is used for ``fp``.
+        Or if the output format could not be determined from the file name.
+        Use the format option to solve this. Or if resulting_width or
+        resulting_height is negative
+    :exception OSError: If the file could not be written.  The file
+        may have been created, and may contain partial data.
     """
+    
+    if resulting_width < 0 or resulting_height < 0:
+        raise ValueError('resulting_width and resulting_height must be higher or equal to zero')
     
     img = Image.open(path)
 
