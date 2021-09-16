@@ -1,5 +1,4 @@
 import math
-import PIL
 from PIL import Image
 
 def resize(path, resulting_width, resulting_height):
