@@ -7,7 +7,7 @@ This package is dedicated to solve problem of resizing images from one size and 
 
 ## How to use
 ```python
-from fill-image-resize import resize
+from fill_image_resize import resize
 
 
 path = 'image.png'
