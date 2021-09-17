@@ -5,6 +5,7 @@ on: push
 jobs:
   build-n-publish-test:
     name: Build and publish Python 🐍 distributions 📦 to TestPyPI
+    if: startsWith(github.ref, "refs/tags/test-v")
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
@@ -33,11 +34,10 @@ jobs:
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
-          skip_existing: true
 
   build-n-publish-release:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
-    if: startsWith(github.ref, 'refs/tags')
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
