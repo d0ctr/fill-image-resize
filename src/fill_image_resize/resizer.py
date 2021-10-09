@@ -1,6 +1,5 @@
 import math
 import requests
-import shutil
 from typing import Optional
 from io import BytesIO
 
